@@ -1,3 +1,6 @@
+//Task at hand
+// Find the percentage of high vs medium vs low priority issues on sample of 500 data points
+
 //start with imports
 import React, {useEffect} from 'react';//React
 import axios from 'axios';//is a promise based HTTP client, used for making requests to API
