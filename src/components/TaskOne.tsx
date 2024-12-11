@@ -1,11 +1,12 @@
 //start with imports
+import React, {useEffect} from 'react';//React
 import axios from 'axios';//is a promise based HTTP client, used for making requests to API
 import { SampleData } from '../api/types';// TypeScript type that defines structure of the data returned
 
 //need the dataURL. This is also used to specify the number of data points
-const DATA_URL = 'https://sampleapi.sqauredup.com/integrations/v1/service-desk?datapoints=500';
+const DATA_URL = '/api/data';
 
-//need to create the fucntion to fetch the data from the API
+//need to create the function to fetch the data from the API
 async function fetchData() {
     const {data} = await axios.get<SampleData>(DATA_URL);
     return data;
@@ -33,6 +34,50 @@ async function calculateIssueTypePercentages() {
     return percentages;
 }
 
-calculateIssueTypePercentages().then(console.log);
-export default class TaskOne {
-}
+//Function to calculate the percentage of each issue type
+//then console.log the result
+const TaskOne: React.FC = () => {
+    const [percentages, setPercentages] = React.useState<{ type: string; percentage: number }[]>([]);
+
+    useEffect(() => {
+        axios.get('https://jsonplaceholder.typicode.com/todos/1')
+            .then(response => console.log(response))
+            .catch(error => console.error('Test request error:', error));
+    }, []);
+
+
+    useEffect(() => {
+        calculateIssueTypePercentages().then(data => {
+            console.log('Setting percentages:', data); //debugging output
+            setPercentages(data);
+        }).catch(error => {
+            console.error('An error occured:', error.message);//error handling
+            if (error.response){
+                //the server responded with a status code that falls out of the range of 2xx
+                console.error('Status:', error.response.status);
+                console.error('Data:', error.response.data);
+            }else if (error.request){
+                //request was made but no response was received
+                console.error('Request:', error.request);
+            }else {
+                //something happened in setting up the request that triggered an error
+                console.error('Error:', error.message);
+            }
+        });
+    }, []);
+
+    return(
+        <div>
+            <h2>Issue Type Percentages</h2>
+            <ul>
+                {percentages.map((item, index) => (
+                    <li key={index}>{item.type}: {item.percentage.toFixed(2)}%</li>
+                ))}
+            </ul>
+        </div>
+    );
+};
+
+export default TaskOne;
+
+
