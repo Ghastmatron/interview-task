@@ -4,7 +4,7 @@ import axios from 'axios';//is a promise based HTTP client, used for making requ
 import { SampleData } from '../api/types';// TypeScript type that defines structure of the data returned
 
 //need the dataURL. This is also used to specify the number of data points
-const DATA_URL = '/api/data';
+const DATA_URL = '/api/data?limit=500';
 
 //need to create the function to fetch the data from the API
 async function fetchData() {
@@ -35,7 +35,7 @@ async function calculateIssueTypePercentages() {
 }
 
 //Function to calculate the percentage of each issue type
-//then console.log the result
+
 const TaskOne: React.FC = () => {
     const [percentages, setPercentages] = React.useState<{ type: string; percentage: number }[]>([]);
 
@@ -44,7 +44,6 @@ const TaskOne: React.FC = () => {
             .then(response => console.log(response))
             .catch(error => console.error('Test request error:', error));
     }, []);
-
 
     useEffect(() => {
         calculateIssueTypePercentages().then(data => {

@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from "react-query"
 import Data from "./Data"
 import TaskOne from "./TaskOne"
+import TaskTwo from "./TaskTwo"
 const queryClient = new QueryClient()
 
 
@@ -12,6 +13,8 @@ function App() {
                 <Data/>
                 <h1 className='mb-4 text-3xl'>Task One</h1>
                 <TaskOne/>
+                <h1 className='mb-4 text-3xl'>Task Two</h1>
+                <TaskTwo/>
             </div>
         </QueryClientProvider>
     );
