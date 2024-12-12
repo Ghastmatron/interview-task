@@ -32,6 +32,12 @@ async function giveDataNumbers(...attributes: string[]): Promise<Record<string, 
     return attributeNumbers;
 }
 
+function getNestedValue(obj: any, path: string): any {
+    //split the path into an array of strings
+    //reduce the array of strings to a single value
+    //if the value is not null and the key is not undefined, return the value
+    //otherwise return null
+    return path.split('.').reduce((value, key) => (value && value[key] !== undefined) ? value[key] : null, obj);}
 
 async function sortDataByAttribute(attribute: string, order: 'asc' | 'desc'){
     //fetch data using fetchData
@@ -40,6 +46,11 @@ async function sortDataByAttribute(attribute: string, order: 'asc' | 'desc'){
     const attributeNumbers = await giveDataNumbers(...data.results.map(result => result[attribute]));
     //sort the data by the attribute
     const sortedData = data.results.sort((a, b) => {
+        const valueA = getNestedValue(a, attribute);
+        const valueB = getNestedValue(b, attribute);
+        if (valueA === null || valueB === null){
+            return 0;
+        }
         if (order === 'asc'){
             return attributeNumbers[a[attribute]] - attributeNumbers[b[attribute]];
         } else {

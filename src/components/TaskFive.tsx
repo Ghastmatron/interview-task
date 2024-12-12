@@ -6,6 +6,8 @@ import React, {useEffect} from 'react';//React
 import axios from 'axios';//is a promise based HTTP client, used for making requests to API
 import { SampleData } from '../api/types';// TypeScript type that defines structure of the data returned
 import {sortDataByPriority_HighestToLowest, sortDataByPriority_LowestToHighest} from "./TaskThree";
+import {sortDataByAttribute} from "./GlobalFunctions";
+import {attributes} from "happy-dom/lib/PropertySymbol.d.ts.js";
 //need the dataURL. This is also used to specify the number of data points
 const DATA_URL = '/api/data';
 
@@ -21,7 +23,6 @@ const TaskFive: React.FC = () => {
     //get tickets
     const [tickets, setTickets] = React.useState<SampleData['results']>([]);
     const [priorityOrder, setPriorityOrder] = React.useState<'asc' | 'desc'>('desc');
-    const [typeOrder, setTypeOrder] = React.useState<'question' | 'problem' | 'incident' | 'task'>('question');
 
     //useEffect to fetch data when the component mounts
     useEffect(() => {
@@ -48,8 +49,9 @@ const TaskFive: React.FC = () => {
         }
     }
 
-    const handleTypeClick = () => {
-
+    //function to sort attributes by words using the sortDataByAttribute function
+    const handleAttributeClicked = (attributes: string) => {
+        sortDataByAttribute(attributes, 'asc').then(sortedData => setTickets(sortedData));
     }
 
     return (
@@ -59,6 +61,15 @@ const TaskFive: React.FC = () => {
             <div className="mb-4 flex space-x-4">
                 <button onClick={() => handlePriorityClick()} className="hover:bg-gray-500 rounded bg-black px-4 py-2 text-white">
                     Sort by Priority
+                </button>
+                <button onClick={() => handleAttributeClicked('type')} className="hover:bg-gray-500 rounded bg-black px-4 py-2 text-white">
+                    Sort by Type
+                </button>
+                <button onClick={() => handleAttributeClicked('status')} className="hover:bg-gray-500 rounded bg-black px-4 py-2 text-white">
+                    Sort by Status
+                </button>
+                <button onClick={() => handleAttributeClicked('satisfaction_rating')} className="hover:bg-gray-500 rounded bg-black px-4 py-2 text-white">
+                    Sort by Satisfaction Rating
                 </button>
             </div>
             <table className="min-w-full bg-white">
