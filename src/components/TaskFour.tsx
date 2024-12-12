@@ -27,18 +27,16 @@ async function filterDataByPriority(){
 //function to display the filtered data
 const TaskFour: React.FC = () => {
     const [filteredData, setFilteredData] = React.useState<SampleData['results']>([]);
-    const [highPriorityCount, setHighPriorityCount] = React.useState<number>(0);//0 is starting value
 
     useEffect(() => {
         axios.get('https://jsonplaceholder.typicode.com/todos/1')
             .then(response => console.log(response))
-            .catch(error => console.error('Test request error:', error));//error handling
+            .catch(error => console.error('Test request error:', error));
     }, []);
 
     useEffect(() => {
         filterDataByPriority().then(data => {
             console.log('Setting filtered data:', data); //debugging output
-            setHighPriorityCount(data.length);
             setFilteredData(data);
         })
     }, []);
@@ -46,10 +44,9 @@ const TaskFour: React.FC = () => {
     return(
         <div>
             <h2>High Priority Open Issues</h2>
-            <p>Total: {highPriorityCount}</p>
             <ul>
                 {filteredData.map((issue, index) => (
-                    <li key={index}> ID: {issue.id}, Type: {issue.type}</li>
+                    <li key={index}>{issue.id}</li>
                 ))}
             </ul>
         </div>

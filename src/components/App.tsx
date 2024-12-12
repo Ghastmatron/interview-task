@@ -4,6 +4,7 @@ import TaskOne from "./TaskOne"
 import TaskTwo from "./TaskTwo"
 import TaskThree from "./TaskThree"
 import TaskFour from "./TaskFour"
+import TaskFive from "./TaskFive"
 const queryClient = new QueryClient()
 
 
@@ -21,6 +22,8 @@ function App() {
                 <TaskThree/>
                 <h1 className='mb-4 text-3xl'>Task Four</h1>
                 <TaskFour/>
+                <h1 className='mb-4 text-3xl'>Task Five</h1>
+                <TaskFive/>
             </div>
         </QueryClientProvider>
     );

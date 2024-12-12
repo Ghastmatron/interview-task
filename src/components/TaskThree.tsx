@@ -5,6 +5,7 @@
 import React, {useEffect} from 'react';//React
 import axios from 'axios';//is a promise based HTTP client, used for making requests to API
 import { SampleData } from '../api/types';// TypeScript type that defines structure of the data returned
+import {sortDataByAttribute} from "./GlobalFunctions";
 
 //need the dataURL. This is also used to specify the number of data points
 const DATA_URL = '/api/data?limit=100';
@@ -55,7 +56,6 @@ async function sortDataByPriority_LowestToHighest(){
     });
     return sortedData;
 }
-
 //will allow the service desk user to view the sorted data in which way they like
 
 //function to display the sorted data
@@ -118,5 +118,6 @@ const TaskThree: React.FC = () => {
         </div>
     );
 }
-//export the component
+//export the component and function
+export {sortDataByPriority_LowestToHighest, sortDataByPriority_HighestToLowest};
 export default TaskThree;
