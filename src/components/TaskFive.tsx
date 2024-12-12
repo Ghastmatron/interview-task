@@ -5,7 +5,7 @@
 import React, {useEffect} from 'react';//React
 import axios from 'axios';//is a promise based HTTP client, used for making requests to API
 import { SampleData } from '../api/types';// TypeScript type that defines structure of the data returned
-
+import {sortDataByPriority_HighestToLowest, sortDataByPriority_LowestToHighest} from "./TaskThree";
 //need the dataURL. This is also used to specify the number of data points
 const DATA_URL = '/api/data';
 
@@ -15,9 +15,13 @@ async function fetchData() {
     return data;
 }
 
+//function to
+
 const TaskFive: React.FC = () => {
     //get tickets
     const [tickets, setTickets] = React.useState<SampleData['results']>([]);
+    const [priorityOrder, setPriorityOrder] = React.useState<'asc' | 'desc'>('desc');
+    const [typeOrder, setTypeOrder] = React.useState<'question' | 'problem' | 'incident' | 'task'>('question');
 
     //useEffect to fetch data when the component mounts
     useEffect(() => {
@@ -34,10 +38,28 @@ const TaskFive: React.FC = () => {
         })
     }, []);
 
+    const handlePriorityClick = () => {
+        if (priorityOrder === 'desc') {
+            sortDataByPriority_HighestToLowest().then(sortedData => setTickets(sortedData));
+            setPriorityOrder('asc');
+        } else {
+            sortDataByPriority_LowestToHighest().then(sortedData => setTickets(sortedData));
+            setPriorityOrder('desc');
+        }
+    }
+
+    const handleTypeClick = () => {
+    }
+
     return (
         <div>
             <h2>Tickets of Key Data</h2>
             <p>Total Tickets: {tickets.length}</p>
+            <div className="mb-4 flex space-x-4">
+                <button onClick={() => handlePriorityClick()} className="hover:bg-gray-500 rounded bg-black px-4 py-2 text-white">
+                    Sort by Priority
+                </button>
+            </div>
             <table className="min-w-full bg-white">
                 <thead>
                 <tr>

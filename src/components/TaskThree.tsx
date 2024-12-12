@@ -55,7 +55,6 @@ async function sortDataByPriority_LowestToHighest(){
     });
     return sortedData;
 }
-
 //will allow the service desk user to view the sorted data in which way they like
 
 //function to display the sorted data
@@ -118,5 +117,6 @@ const TaskThree: React.FC = () => {
         </div>
     );
 }
-//export the component
+//export the component and function
+export {sortDataByPriority_LowestToHighest, sortDataByPriority_HighestToLowest};
 export default TaskThree;
