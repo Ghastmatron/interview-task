@@ -1,0 +1,20 @@
+#Interview Tasks
+##Task one - Find the percentage of problems vs questions vs task types of issues on sample of 500 data points
+Task one was the first one I saw, since having never worked on the languages much before
+i stuck with a simpler task to begin with. 
+
+##Task two - Find the percentage of high vs medium vs low priority issues on sample of 500 data points
+Take two was one i wanted to attempt to put my new skills to the test and adapt the code i had
+already written. 
+
+##Task three - A service desk operator wants to view a list of all issues of any type, sorted by priority (use sample of 100 data points)
+I went for a front end issue in this case. This is one i also wanted the layout to look better since it was a front end issue, i did this
+by implementing a table to store the attributes wanted, and a way to sort them from lowest to highest and highest to lowest
+
+##Task four - A service desk operator wants to filter all the open issues of high priority
+I again went for another front end issue. This one wasn't particularily challenging, however i believe this is my worst one
+
+##Task five - A service desk manager wants a high-level view of key data including number of tickets by priority, type, status and satisfaction_rating
+This was the most difficult one yet since it reference a high level view. This to me screamed tables and sorting, since they want to view the key data 
+of the tickets. Currently i have implemented the key data only specfied, and allowing the user to sort each of the collumns. I am wanting to advance on
+this, by making a dropdown list and allowing the service desk user to add and remove collumns they want or dont want there. 
